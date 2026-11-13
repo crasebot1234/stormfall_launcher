@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StormFallIO Launcher</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black;
+            color: white;
+            font-family: sans-serif;
+        }
+        #loading {
+            text-align: center;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Loading StormFallIO...</div>
+    <script>
+        // Raw GitHub URL for stormfall.html
+        const rawURL = "https://raw.githubusercontent.com/krishnasaigaruda/StormFallIO/master/stormfall.html";
+
+        fetch(rawURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load stormfall.html: " + response.status);
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Replace current document with the fetched HTML
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(err => {
+                document.getElementById("loading").innerText = "Error: " + err.message;
+            });
+    </script>
+</body>
+</html>
